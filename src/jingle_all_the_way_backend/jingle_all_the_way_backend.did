@@ -1,0 +1,45 @@
+type Error = variant {
+  InvalidInput : record { msg : text };
+  NotFound : record { msg : text };
+};
+type Gift = record {
+  id : nat64;
+  status : text;
+  updated_at : opt nat64;
+  recipient_id : nat64;
+  name : text;
+  description : text;
+  created_at : nat64;
+};
+type GiftPayload = record {
+  status : text;
+  recipient_id : nat64;
+  name : text;
+  description : text;
+};
+type Recipient = record {
+  id : nat64;
+  updated_at : opt nat64;
+  relationship : text;
+  name : text;
+  created_at : nat64;
+};
+type RecipientPayload = record { relationship : text; name : text };
+type Result = variant { Ok : Gift; Err : Error };
+type Result_1 = variant { Ok : Recipient; Err : Error };
+type Result_2 = variant { Ok : vec Gift; Err : Error };
+type Result_3 = variant { Ok : vec Recipient; Err : Error };
+service : {
+  add_gift : (GiftPayload) -> (opt Gift);
+  add_recipient : (RecipientPayload) -> (opt Recipient);
+  delete_gift : (nat64) -> (Result);
+  delete_recipient : (nat64) -> (Result_1);
+  get_all_gifts : () -> (Result_2) query;
+  get_all_recipients : () -> (Result_3) query;
+  get_gift : (nat64) -> (Result) query;
+  get_recent_recipients : () -> (Result_3) query;
+  get_recipient : (nat64) -> (Result_1) query;
+  search_gift : (text) -> (Result_2) query;
+  update_gift : (nat64, GiftPayload) -> (Result);
+  update_recipient : (nat64, RecipientPayload) -> (Result_1);
+}

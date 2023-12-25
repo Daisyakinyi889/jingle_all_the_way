@@ -1,0 +1,30 @@
+{
+  "canisters": {
+    "jingle_all_the_way_backend": {
+      "candid": "src/jingle_all_the_way_backend/jingle_all_the_way_backend.did",
+      "package": "jingle_all_the_way_backend",
+      "type": "rust"
+    },
+    "jingle_all_the_way_frontend": {
+      "dependencies": [
+        "jingle_all_the_way_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/jingle_all_the_way_frontend/src/index.html"
+      },
+      "source": [
+        "src/jingle_all_the_way_frontend/assets",
+        "dist/jingle_all_the_way_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
